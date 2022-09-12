@@ -1,0 +1,74 @@
+Title: Indigency "Flowchart"
+Author: Spencer Cribby
+Before: <link rel="stylesheet" type="text/css" href="https://suffolklitlab.org/howto/qna/style/style.css">
+<div id="icon" style="background-size: 110px 99px;background-image: url('https://suffolklitlab.org/howto/qna/images/maxheadroom.gif');"></div>
+<h2 style="text-align:center;">Indigency "Flowchart"</h2>
+<p><b>This is a <a href="https://www.codingthelaw.org/level/2/#mission_p1">class project</a>. You should not rely on it as a source of legal information!</b></p>
+<p>Answer the following questions to see if you qualify for appointed counsel in New Jersey.</p>
+<script>
+function fedpov(house,income,percentage){
+	// Determines if your income is less than or equal to
+	// a percentage of the 2021 federal poverty guidelines
+	// for the contiguous United States. See
+	// https://aspe.hhs.gov/poverty-guidelines
+
+		var line = NaN;
+
+		if (house == 1) {
+			line = 12880;
+		} else if (house == 2) {
+			line = 17420;
+		} else if (house == 3) {
+			line = 21960;
+		} else if (house == 4) {
+			line = 26500;
+		} else if (house == 5) {
+			line = 31040;
+		} else if (house == 6) {
+			line = 35580;
+		} else if (house == 7) {
+			line = 40120;
+		} else if (house == 8) {
+			line = 44660;
+		} else if (house > 8) {
+			line = 44660 + (house-8)*4540;
+		}
+
+		if (income <= (line*(percentage/100))) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+</script>
+Q(1): Have you been formally charged with the commission of an indictable offense?
+A: Yes
+	Q(1.1): Do you have the present financial ability to secure competent legal representation?
+	A: Yes
+		Q(1.1.1):GOTO:3
+	A: No
+		Q(1.1.2): Do you have the present financial ability to provide all other necessary expenses of representation?
+		A: Yes
+			Q(1.1.2.1):GOTO:3
+		A: No
+			Q(house): How many people are in your household?
+			X:number
+				Q(income): How much income does your household bring in per year in after tax dollars?
+				X:number
+					Q(1.1.2.2.1.1): Are you facing a civil or criminal matter?
+					A[javascript:if (fedpov(getvar('house'),getvar('income'),125)){ goto('4') } else { goto('3') } ]: Civil
+					A[javascript:if (fedpov(getvar('house'),getvar('income'),125)){ goto('4') } else if (fedpov(getvar('house'),getvar('income'),125)) { goto('5') } else { goto('3') } ]: Criminal
+A: No
+	Q(1.2):GOTO:3
+Q(2):GOTO:2
+Q(3): You do not qualify for appointed counsel
+Q(4): Do you have the ability to make bail either by yourself or by someone else?
+A: Yes
+	Q(4.1): You may not qualify for appointed counsel.
+A: No
+	Q(4.2): Do you collect unemployment, disability, social security, and/or veteran's benefits as well as other forms of public assistance including food stamps?
+	A: Yes
+		Q(4.2.1): You may not qualify for appointed counsel.
+	A: No
+		Q(4.2.2):GOTO:5
+Q(5): You do qualify for appointed counsel
