@@ -1,5 +1,5 @@
 Title: Indigency "Flowchart"
-Author: [your name]
+Author: Spencer Cribby
 Before: <link rel="stylesheet" type="text/css" href="https://suffolklitlab.org/howto/qna/style/style.css">
 <div id="icon" style="background-size: 110px 99px;background-image: url('https://suffolklitlab.org/howto/qna/images/maxheadroom.gif');"></div>
 <h2 style="text-align:center;">Indigency "Flowchart"</h2>
